@@ -63,24 +63,6 @@
         android:onClick="playerClick"
         android:text="4" />
 
-    <TextView
-        android:id="@+id/randomnumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_alignStart="@+id/button3"
-        android:layout_below="@+id/button3"
-        android:layout_marginTop="16dp"
-        android:text="Simon:" />
-
-    <TextView
-        android:id="@+id/queue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_above="@+id/play"
-        android:layout_alignStart="@+id/randomnumber"
-        android:text="Queue:" />
 
     <Button
         android:id="@+id/play"
@@ -95,5 +77,4 @@
 
 
 
-</RelativeLayout
-    >
+</RelativeLayout>
