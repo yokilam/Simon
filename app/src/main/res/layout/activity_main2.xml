@@ -15,37 +15,44 @@
 
     <Button
         android:id="@+id/button1"
+        android:background="@color/blue"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/play"
         android:layout_centerVertical="true"
         android:layout_marginEnd="59dp"
         android:gravity="center"
+        android:onClick="playerClick"
         android:text="1" />
 
 
     <Button
         android:id="@+id/button2"
+        android:background="@color/red"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/button1"
         android:layout_alignBottom="@+id/button1"
         android:layout_alignStart="@+id/button4"
         android:gravity="center"
+        android:onClick="playerClick"
         android:text="2" />
 
     <Button
         android:id="@+id/button3"
+        android:background="@color/green"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/button1"
         android:layout_below="@+id/button1"
         android:layout_marginTop="16dp"
         android:gravity="center"
+        android:onClick="playerClick"
         android:text="3" />
 
     <Button
         android:id="@+id/button4"
+        android:background="@color/yellow"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/button3"
@@ -53,6 +60,7 @@
         android:layout_marginStart="20dp"
         android:layout_toEndOf="@+id/button3"
         android:gravity="center"
+        android:onClick="playerClick"
         android:text="4" />
 
     <TextView
@@ -83,7 +91,7 @@
         android:layout_marginBottom="52dp"
         android:gravity="center"
         android:text="play"
-        android:onClick="onClick"/>
+        android:onClick="onPlay"/>
 
 
 

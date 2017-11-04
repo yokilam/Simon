@@ -1,12 +1,16 @@
 package nyc.c4q.simon_says;
 
 import android.media.Image;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -16,19 +20,26 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
+import java.util.Timer;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity {
 
-    private Button one, two, three, four;
-    private TextView showrandom;
-
-    public ArrayList<Integer> buttonSequence = new ArrayList<Integer>(Arrays.asList(1,2,3,4));
-    public Queue<Integer> randomSequence = new LinkedList<>();
-
-    //array list with just 1,2,3,4
-    //a queue
+    private Button blue, red, green, yellow, play;
+    private Button[] color;
     static Random random = new Random();
+    AlphaAnimation animation = new AlphaAnimation(1f, 0f);
+    Handler handler = new Handler();
+    int count = 1;
 
+    private TextView roundnumber;
+    private TextView showrandom;
+    private TextView queue;
+
+    //    public ArrayList<Integer> buttonSequence = new ArrayList<Integer>(Arrays.asList(1,2,3,4));
+    public ArrayList<Integer> buttonSequence = new ArrayList<Integer>();
+    public Queue<Integer> randomSequence = new LinkedList<>();
+    public ArrayList<Integer> userChoice = new ArrayList<>();
+    private boolean running= false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,44 +47,108 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main2);
 
 
-        one = (Button) findViewById(R.id.button1);
-        one.setOnClickListener(this);
-        two = (Button) findViewById(R.id.button2);
-        two.setOnClickListener(this);
-        three = (Button) findViewById(R.id.button3);
-        three.setOnClickListener(this);
-        four = (Button) findViewById(R.id.button4);
-        four.setOnClickListener(this);
-        showrandom = (TextView)findViewById(R.id.randomnumber);
-//        Collections.shuffle(buttonSequence);
+        red = (Button) findViewById(R.id.button2);
+        blue = (Button) findViewById(R.id.button1);
+        green = (Button) findViewById(R.id.button3);
+        yellow = (Button) findViewById(R.id.button4);
+        play = (Button) findViewById(R.id.play);
+        roundnumber= (TextView) findViewById(R.id.roundnumber);
 
-//        red = (ImageView) findViewById(R.id.imagered);
-//        blue = (ImageView) findViewById(R.id.imageblue);
-//        green = (ImageView) findViewById(R.id.imagegreen);
-//        yellow = (ImageView) findViewById(R.id.imageyellow);
-
+        animation.setDuration(1000);
+        color = new Button[]{blue, red, green, yellow};
 
     }
-    public void play() {
+    public void onPlay(View view){
+        running= true;
+        simon(view);
 
     }
 
-    @Override
-    public void onClick(View view) {
-        showrandom.setText("hi");
-        Collections.shuffle(buttonSequence);
-        for (int i= 0; i < buttonSequence.size(); i++) {
-            int number= buttonSequence.get(i);
-            Collections.addAll(randomSequence, number);
-            showrandom.setText("" + randomSequence);
-        }
+    public void simon(View view) {
+        while (running) {
+
+
+            int r = random.nextInt(4);
+            Log.e("random number = ", ("" + r));
+            buttonSequence.add(r);
+            int size= userChoice.size()+1;
+            roundnumber.setText("level: "+ size);
+            for (int s : buttonSequence) {
+
+                switch (color[s].getId()) {
+                    case R.id.button1:
+
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                blue.startAnimation(animation);
+                            }
+                        }, 1000 * count);
+                        count++;
+                        break;
+                    case R.id.button2:
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                red.startAnimation(animation);
+                            }
+                        }, 1000 * count);
+                        count++;
+                        break;
+                    case R.id.button3:
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                green.startAnimation(animation);
+                            }
+                        }, 1000 * count);
+                        count++;
+                        break;
+                    case R.id.button4:
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                yellow.startAnimation(animation);
+                            }
+                        }, 1000 * count);
+                        count++;
+                        break;
+                }
+//                count = 1;
+
+            }
+            running = false;
+            playerClick(view);
+        } //while end
+
     }
 
+    public void playerClick(View view) {
+         switch (view.getId()) {
+             case R.id.button1:
+               userChoice.add(0);
+               break;
+             case R.id.button2:
+                 userChoice.add(1);
+                 break;
+             case R.id.button3:
+                 userChoice.add(2);
+                 break;
+             case R.id.button4:
+                 userChoice.add(3);
+                 break;
+         }
+         if (buttonSequence.size() == userChoice.size()) {
+             if (buttonSequence.equals(userChoice)) {
+                 running = true;
+                 userChoice.clear();
+//                 int size= userChoice.size()+1;
+//                 roundnumber.setText("level: "+ size);
+                 Toast.makeText(this, "level: "+( userChoice.size()+2), Toast.LENGTH_SHORT).show();
+                 simon(view);
 
-//    public void random(ImageView[] gamebuttons) {
-//        for (int i = 0; i< gamebuttons.length; i++) {
-//            int id = getApplicationContext().getResources().findViewByID(i);
-//            gamebuttons[i] = (ImageView) getApplicationContext().getResources().getLayout(findViewById(id));
-//        }
-//    }
+             }
+         }
+
+    }
 }
