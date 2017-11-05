@@ -1,6 +1,4 @@
 package nyc.c4q.simon_says;
-
-import android.media.Image;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,69 +6,52 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Random;
-import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity {
-
     private Button blue, red, green, yellow, play;
     private Button[] color;
     static Random random = new Random();
     AlphaAnimation animation = new AlphaAnimation(1f, 0f);
     Handler handler = new Handler();
     private int count = 1;
-
-
     private TextView roundnumber;
-
-    public ArrayList<Integer> buttonSequence = new ArrayList<Integer>();
-    public ArrayList<Integer> userChoice = new ArrayList<>();
+    public ArrayList<Integer> buttonSequence = new ArrayList<>(); //for the generate
+    public ArrayList<Integer> userChoice = new ArrayList<>();   //for the userclick
     private boolean running = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-
         red = (Button) findViewById(R.id.button2);
         blue = (Button) findViewById(R.id.button1);
         green = (Button) findViewById(R.id.button3);
         yellow = (Button) findViewById(R.id.button4);
         play = (Button) findViewById(R.id.play);
         roundnumber = (TextView) findViewById(R.id.roundnumber);
-
         animation.setDuration(1000);
         color = new Button[]{blue, red, green, yellow};
-
     }
 
     public void onPlay(View view) {
         running = true;
-        simon(view);
-
+        buttonSequence.clear();
+        simon();
+        //playerClick(view);
     }
 
-    public void simon(View view) {
+    public void simon() {
         while (running) {
             int r = random.nextInt(4);
             Log.e("random number = ", ("" + r));
             buttonSequence.add(r);
             for (int s : buttonSequence) {
-
                 switch (color[s].getId()) {
                     case R.id.button1:
-
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -106,15 +87,11 @@ public class MainActivity extends AppCompatActivity {
                         }, 2000 * count);
                         count++;
                         break;
-                }
-
-            }
-
+                }  //swtich end
+            } ///for each
             running = false;
             userChoice.clear();
-            playerClick(view);
         } //while end
-
     }
 
     public void playerClick(View view) {
@@ -132,21 +109,20 @@ public class MainActivity extends AppCompatActivity {
                 userChoice.add(3);
                 break;
         }
+        Log.e("userChoiceLIST SIZE IS:", "" + userChoice.size());
         if (buttonSequence.size() == userChoice.size()) {
-            if (buttonSequence.equals(userChoice)) {
+            Log.e("userchoice size: ", "" + userChoice.size());
+            if (userChoice.equals(buttonSequence)) {
                 running = true;
                 int size = buttonSequence.size() + 1;
                 roundnumber.setText("level: " + size);
                 Toast.makeText(this, "good job!", Toast.LENGTH_SHORT).show();
                 count = 1;
-                simon(view);
-
+                simon();
             } else {
-
-                //if choice not equel
-
+                Toast.makeText(this, "Game Over!", Toast.LENGTH_SHORT).show();
+                running = false;
             }
-
         }
     }
 }

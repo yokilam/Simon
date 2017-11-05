@@ -10,17 +10,18 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/button2"
         android:layout_alignStart="@+id/button1"
-        android:layout_marginBottom="23dp"
+        android:layout_marginBottom="13dp"
         android:text="Round: 1" />
 
     <Button
         android:id="@+id/button1"
-        android:background="@color/blue"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/play"
-        android:layout_centerVertical="true"
+        android:layout_alignParentTop="true"
         android:layout_marginEnd="59dp"
+        android:layout_marginTop="168dp"
+        android:background="@color/blue"
         android:gravity="center"
         android:onClick="playerClick"
         android:text="1" />
@@ -68,12 +69,12 @@
         android:id="@+id/play"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/button3"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="52dp"
+        android:layout_marginTop="52dp"
         android:gravity="center"
-        android:text="play"
-        android:onClick="onPlay"/>
+        android:onClick="onPlay"
+        android:text="play" />
 
 
 
