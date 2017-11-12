@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onPlay(View view) {
+
         running = true;
         buttonSequence.clear();
         simon();
@@ -139,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Game Over!", Toast.LENGTH_SHORT).show();
                 running = false;
+
             }
         }
     }
