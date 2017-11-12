@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.skyfishjy.library.RippleBackground;
@@ -26,15 +28,25 @@ public class Splash extends AppCompatActivity {
         ImageView simonView= (ImageView) findViewById(R.id.simon_text);
         imageView.startAnimation(animSlide);
         simonView.startAnimation(textSlide);
-        rippleBackground.startRippleAnimation();
-
+        final Button play=(Button)findViewById(R.id.play_button);
+        play.setVisibility(View.INVISIBLE);
         Handler h = new Handler();
         h.postDelayed(new Runnable() {
             @Override
             public void run() {
-
-                startActivity(intent);
+                rippleBackground.startRippleAnimation();
+                play.setVisibility(View.VISIBLE);
             }
         }, 4000);
+
+
+
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                  startActivity(intent);
+
+            }
+        });
     }
 }
