@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
@@ -31,10 +34,24 @@ public class MainActivity extends AppCompatActivity {
         blue = (Button) findViewById(R.id.button1);
         green = (Button) findViewById(R.id.button3);
         yellow = (Button) findViewById(R.id.button4);
+
+        Animation buttonslide1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide1);
+        red.startAnimation(buttonslide1);
+        Animation buttonslide4 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide4);
+        green.startAnimation(buttonslide4);
+
+
+        Animation buttonslide2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide2);
+        blue.startAnimation(buttonslide2);
+        Animation buttonslide3 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide3);
+        yellow.startAnimation(buttonslide3);
+
         play = (Button) findViewById(R.id.play);
         roundnumber = (TextView) findViewById(R.id.roundnumber);
         animation.setDuration(1000);
         color = new Button[]{blue, red, green, yellow};
+
+
     }
 
     public void onPlay(View view) {
