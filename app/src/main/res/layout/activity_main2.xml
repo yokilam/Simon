@@ -1,87 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@drawable/gradient_background">
 
+
     <TextView
         android:id="@+id/roundnumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/button1"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginStart="70dp"
+        android:fontFamily="sans-serif-smallcaps"
         android:text="Round: 1"
         android:textColor="@color/white"
-        android:textStyle="bold"
         android:textSize="30sp"
-        android:fontFamily="sans-serif-smallcaps"/>
+        android:textStyle="bold" />
 
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="40dp">
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/circle"
+            android:onClick="playerClick"
+            android:text="1" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/circle"
+            android:gravity="center"
+            android:onClick="playerClick"
+            android:text="3" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="-15dp">
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/circle"
+            android:gravity="center"
+            android:onClick="playerClick"
+            android:text="2" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/circle"
+            android:gravity="center"
+            android:onClick="playerClick"
+            android:text="4" />
+
+    </LinearLayout>
 
     <Button
-        android:id="@+id/button1"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_alignEnd="@+id/play"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="40dp"
-        android:layout_marginTop="120dp"
-        android:background="@drawable/circle"
-        android:gravity="center"
-        android:onClick="playerClick"
-        android:text="1" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_alignEnd="@+id/play"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="-127dp"
-        android:layout_marginTop="120dp"
-        android:background="@drawable/circle"
-        android:gravity="center"
-        android:onClick="playerClick"
-        android:text="2" />
-
-    <Button
-        android:id="@+id/button3"
-        android:background="@drawable/circle"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_alignStart="@+id/button1"
-        android:layout_below="@+id/button1"
-        android:layout_marginTop="-30dp"
-        android:gravity="center"
-        android:onClick="playerClick"
-        android:text="3" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_above="@+id/play"
-        android:layout_marginStart="17dp"
-        android:layout_toEndOf="@+id/button3"
-        android:background="@drawable/circle"
-        android:gravity="center"
-        android:onClick="playerClick"
-        android:text="4" />
-
-
-    <Button
-        android:id="@+id/play"
+        android:id="@+id/start"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
-        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
         android:onClick="onPlay"
-        android:text="play" />
+        android:background="@color/clear"
+        android:textColor="@color/white"
+        android:textSize="23dp"
+        android:text="Start" />
 
 
-
-</RelativeLayout>
+</LinearLayout>

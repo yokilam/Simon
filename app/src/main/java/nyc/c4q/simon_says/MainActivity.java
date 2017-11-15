@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-    private Button blue, red, green, yellow, play;
+    private Button two, one, three, four, start;
     private Button[] color;
     static Random random = new Random();
     AlphaAnimation animation = new AlphaAnimation(1f, 0f);
@@ -30,36 +30,70 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        red = (Button) findViewById(R.id.button2);
-        blue = (Button) findViewById(R.id.button1);
-        green = (Button) findViewById(R.id.button3);
-        yellow = (Button) findViewById(R.id.button4);
+        two = (Button) findViewById(R.id.button2);
+        one = (Button) findViewById(R.id.button1);
+        three = (Button) findViewById(R.id.button3);
+        four = (Button) findViewById(R.id.button4);
 
-        Animation buttonslide1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide1);
-        red.startAnimation(buttonslide1);
-        Animation buttonslide4 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide4);
-        green.startAnimation(buttonslide4);
+        one.setVisibility(View.INVISIBLE);
+        three.setVisibility(View.INVISIBLE);
+        four.setVisibility(View.INVISIBLE);
+        two.setVisibility(View.INVISIBLE);
 
+//        Animation buttonslide1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide1);
+//        red.startAnimation(buttonslide1);
+//        Animation buttonslide4 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide4);
+//        green.startAnimation(buttonslide4);
+//
+//
+//        Animation buttonslide2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide2);
+//        blue.startAnimation(buttonslide2);
+//        Animation buttonslide3 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide3);
+//        yellow.startAnimation(buttonslide3);
 
-        Animation buttonslide2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide2);
-        blue.startAnimation(buttonslide2);
-        Animation buttonslide3 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide3);
-        yellow.startAnimation(buttonslide3);
-
-        play = (Button) findViewById(R.id.play);
+        start = (Button) findViewById(R.id.start);
         roundnumber = (TextView) findViewById(R.id.roundnumber);
+        roundnumber.setVisibility(View.INVISIBLE);
         animation.setDuration(1000);
-        color = new Button[]{blue, red, green, yellow};
+        color = new Button[]{two, one, three, four};
 
 
     }
 
     public void onPlay(View view) {
+        one.setVisibility(View.VISIBLE);
+        three.setVisibility(View.VISIBLE);
+        four.setVisibility(View.VISIBLE);
+        two.setVisibility(View.VISIBLE);
+        roundnumber.setVisibility(View.VISIBLE);
+        start.setVisibility(View.INVISIBLE);
+
+        Animation buttonslide1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide1);
+        one.startAnimation(buttonslide1);
+        Animation buttonslide3 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide3);
+        three.startAnimation(buttonslide3);
+
+
+        Animation buttonslide2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide2);
+        two.startAnimation(buttonslide2);
+        Animation buttonslide4 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide4);
+        four.startAnimation(buttonslide4);
 
         running = true;
         buttonSequence.clear();
         simon();
         //playerClick(view);
+    }
+
+    public void reset(){
+        one.setVisibility(View.GONE);
+        three.setVisibility(View.GONE);
+        four.setVisibility(View.GONE);
+        two.setVisibility(View.GONE);
+        roundnumber.setVisibility(View.GONE);
+        roundnumber.setText("Level: 1");
+        start.setVisibility(View.VISIBLE);
+        count= 0;
     }
 
     public void simon() {
@@ -73,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                blue.startAnimation(animation);
+                                two.startAnimation(animation);
                             }
                         }, 2000 * count);
                         count++;
@@ -82,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                red.startAnimation(animation);
+                                one.startAnimation(animation);
                             }
                         }, 2000 * count);
                         count++;
@@ -91,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                green.startAnimation(animation);
+                                three.startAnimation(animation);
                             }
                         }, 2000 * count);
                         count++;
@@ -100,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                yellow.startAnimation(animation);
+                                four.startAnimation(animation);
                             }
                         }, 2000 * count);
                         count++;
@@ -140,6 +174,8 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Game Over!", Toast.LENGTH_SHORT).show();
                 running = false;
+                reset();
+
 
             }
         }

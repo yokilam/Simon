@@ -13,5 +13,6 @@
     <color name="lightGreen">#bef1a8</color>
     <color name="lightBlue">#a5d2ec</color>
     <color name="lightRed">#ffaea3</color>
+    <color name="clear">#00000000</color>
 
 </resources>
