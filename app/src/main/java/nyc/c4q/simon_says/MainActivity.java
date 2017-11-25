@@ -40,17 +40,6 @@ public class MainActivity extends AppCompatActivity {
         four.setVisibility(View.INVISIBLE);
         two.setVisibility(View.INVISIBLE);
 
-//        Animation buttonslide1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide1);
-//        red.startAnimation(buttonslide1);
-//        Animation buttonslide4 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide4);
-//        green.startAnimation(buttonslide4);
-//
-//
-//        Animation buttonslide2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide2);
-//        blue.startAnimation(buttonslide2);
-//        Animation buttonslide3 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide3);
-//        yellow.startAnimation(buttonslide3);
-
         start = (Button) findViewById(R.id.start);
         roundnumber = (TextView) findViewById(R.id.roundnumber);
         roundnumber.setVisibility(View.INVISIBLE);
@@ -81,8 +70,16 @@ public class MainActivity extends AppCompatActivity {
 
         running = true;
         buttonSequence.clear();
-        simon();
-        //playerClick(view);
+
+        Handler handler= new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                disableClick();
+                simon();
+                //enableClick();
+            }
+        }, 1000);
     }
 
     public void reset(){
@@ -91,9 +88,24 @@ public class MainActivity extends AppCompatActivity {
         four.setVisibility(View.GONE);
         two.setVisibility(View.GONE);
         roundnumber.setVisibility(View.GONE);
+        start.setClickable(true);
         roundnumber.setText("Level: 1");
         start.setVisibility(View.VISIBLE);
         count= 0;
+    }
+
+    public void disableClick(){
+        one.setClickable(false);
+        two.setClickable(false);
+        three.setClickable(false);
+        four.setClickable(false);
+    }
+
+    public void enableClick(){
+        one.setClickable(true);
+        two.setClickable(true);
+        three.setClickable(true);
+        four.setClickable(true);
     }
 
     public void simon() {
@@ -144,6 +156,8 @@ public class MainActivity extends AppCompatActivity {
             running = false;
             userChoice.clear();
         } //while end
+        //enableClick();
+
     }
 
     public void playerClick(View view) {

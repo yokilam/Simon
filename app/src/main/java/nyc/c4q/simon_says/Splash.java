@@ -44,7 +44,7 @@ public class Splash extends AppCompatActivity {
                 play.setVisibility(View.VISIBLE);
 
             }
-        }, 4000);
+        }, 3500);
         play.startAnimation(playSlide);
 
         play.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +52,7 @@ public class Splash extends AppCompatActivity {
             public void onClick(View view){
 
                   startActivity(intent);
-                  //rippleBackground.stopRippleAnimation();
+                  rippleBackground.stopRippleAnimation();
             }
         });
     }
