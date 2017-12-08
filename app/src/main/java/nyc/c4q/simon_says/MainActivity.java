@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 disableClick();
                 simon();
-                //enableClick();
+//                enableClick();
             }
         }, 1000);
     }
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
             running = false;
             userChoice.clear();
         } //while end
-        //enableClick();
+        enableClick();
 
     }
 
